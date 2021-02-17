@@ -230,6 +230,12 @@ for(var i=0;i<PrixTotalProduit.length;i++){
     }
 }
     
+}else{
+    priceTotal =0;
+    TotalPrixProduit.style = "text-decoration:none";
+    valuePromo.innerHTML="0";
+     TotalPrixProduit.innerHTML =priceTotal + "DH";
+     document.getElementById("priceTotal").innerHTML= priceTotal + ".00 DHs ";
 }
    
 }
@@ -261,6 +267,8 @@ async function deletePanierProduct(idp){
     var doc = await axios.get(`http://localhost:3000/api/removePanier/${idp}`);
     var supprimer = doc.data;
     getAllPanier();
+    nbrPanier();
+    prixTotalProduct()
    // location.href="MealsMenu.html";
 }
 
@@ -310,7 +318,9 @@ async function pdfDownload() {
    produitName +="****  => Le prix Total est : = " + TotalPrixProduit.innerHTML+ " ,  Value promo : " +  valuePromo.innerHTML + " Prix Total (Value promo) est : " + PrixTotal.innerHTML + " **** ";
     commande =` ****  => Le prix Total est : = ${TotalPrixProduit.innerHTML} ,  Le Value promo :  ${valuePromo.innerHTML} %  , 
      le prix total(value promo ) : ${PrixTotal.innerHTML} `; 
-    var data = {
+   
+   
+     var data = {
         //"documentTitle": "RECEIPT", //Defaults to INVOICE
         "currency": "USD",
         "taxNotation": "vat", //or gst
@@ -318,7 +328,7 @@ async function pdfDownload() {
         "marginRight": 25,
         "marginLeft": 25,
         "marginBottom": 25,
-        "logo": "../public/img/logo.png", //or base64
+        "logo": "https://res.cloudinary.com/dvcfkuvod/image/upload/v1613384857/logo_df7gba.png", //or base64
         //"logoExtension": "png", //only when logo is base64
         "sender": {
             "company": "Your Welcome",

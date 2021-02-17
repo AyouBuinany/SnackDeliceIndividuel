@@ -5,6 +5,7 @@ const { json } = require('body-parser');
 const { db } = require('../models/Product.model');
 const fs = require('fs');
 var easyinvoice = require('easyinvoice');
+
 //list Product 
 const listPanierProduct= async(req,resp,next)=>{
 Panier.aggregate([{
@@ -122,7 +123,6 @@ var Createpdf=(req, res, next)=>{
     var yyyy = today.getFullYear();
     
     today = mm + '-' + dd + '-' + yyyy;
-       
      // let id  = 33
      var data = {
         //"documentTitle": "RECEIPT", //Defaults to INVOICE
@@ -132,7 +132,7 @@ var Createpdf=(req, res, next)=>{
         "marginRight": 25,
         "marginLeft": 25,
         "marginBottom": 25,
-        "logo": "../public/img/logo.png", //or base64
+        "logo": "https://res.cloudinary.com/dvcfkuvod/image/upload/v1613384857/logo_df7gba.png", //or base64
         //"logoExtension": "png", //only when logo is base64
         "sender": {
             "company": "Your Welcome",
@@ -162,6 +162,35 @@ var Createpdf=(req, res, next)=>{
 
   
 }
+
+
+const invoice = {
+    shipping: {
+      name: "John Doe",
+      address: "1234 Main Street",
+      city: "San Francisco",
+      state: "CA",
+      country: "US",
+      postal_code: 94111
+    },
+    items: [
+      {
+        item: "TC 100",
+        description: "Toner Cartridge",
+        quantity: 2,
+        amount: 6000
+      },
+      {
+        item: "USB_EXT",
+        description: "USB Cable Extender",
+        quantity: 1,
+        amount: 2000
+      }
+    ],
+    subtotal: 8000,
+    paid: 0,
+    invoice_nr: 1234
+  };
 module.exports={
     listPanier,Add,listPanierProduct,updatePanier,deletePanier,removeAllPanier,Createpdf
 }

@@ -29,7 +29,8 @@ res.json({
 const ProductSouCategorie= (req,res,next)=>{
     let IdSouCategory= req.params.id;
     Product.find({
-        souCategory:IdSouCategory
+        souCategory:IdSouCategory,
+        $where:'this.Quantity>0'
     }).then(response =>{
         res.json({
         response })
